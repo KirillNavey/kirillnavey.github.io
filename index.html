@@ -1,103 +1,88 @@
-<!doctype html>
-<html lang="RU">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Чатик</title>
-    <meta name="description" content="">
-    <link rel="stylesheet" href="markdown.min.css">
-    <link rel="stylesheet" href="codemirror.min.css">
-    <link rel="stylesheet" href="toastify.min.css">
-    <link rel="stylesheet" href="default.min.css">
-    <link rel="stylesheet" href="bootstrap-select.min.css">
-    <link rel="stylesheet" href="app.css">
-    
-    
-</head>
-<body class="webio-theme-default">
-<div class="pywebio">
-    <div class="container no-fix-height" id="output-container">
-        <div class="markdown-body" id="markdown-body">
-            <div class="text-center" id="pywebio-loading" style="display: none; position: fixed; top: 40%; left: 0;right: 0;">
-                <div class="spinner-grow text-info" role="status">
-                    <span class="sr-only">Loading...</span>
-                </div>
-            </div>
+<html>
 
-            <div id="pywebio-scope-ROOT"></div>
-        </div>
-        <div id="end-space"></div>
+  <head>
+    <title>XYZ</title>
+    <style>
+      body {
+        background-image: url("https://clck.ru/s9rT6");
+        background-size: cover;
+        background-position: center;
+        color: #ffffff;
+        font-family: calibri;
+        font-size: 2rem;
+        text-shadow: 0px 0px 3px #000000
+      }
 
+      .sec1 {
+        text-align: center;
+        font-family: calibri;
+        font-size: 3rem;
+        text-shadow: 0px 0px 3px #000000
+      }
+
+      .img {
+        text-align: center;
+      }
+
+      img {
+        width: 30rem;
+      }
+
+      .list {
+        font-size: 1.3rem;
+
+      }
+    </style>
+  </head>
+
+  <body>
+    <section style="text-align: center;">
+      <h1 class="sec1"><b>Чефир</b></h1>
+      <p><b>Как приготовить чефир?</b></p>
+    </section>
+    <ol class="list">
+      <p>Чефир готовится на огне</p>
+
+      <li>
+        заполните кружку наполовину или на две трети
+
+      </li>
+
+      <li>
+        доведите воду до кипения
+
+      </li>
+
+      <li>
+        оставьте на 5 минут
+
+      </li>
+
+      <li>
+        накройте крышкой и прокипятите настой пару минут
+
+      </li>
+
+      <li>
+        снимите с огня посуду с напитком и укутайте ее
+
+      </li>
+
+      <li>
+        насыпьте от 4 до 6 ложек сухой чайной заварки
+
+      </li>
+
+      <li>
+        процедите настой
+
+      </li>
+
+    </ol>
+    <div class="img"> <img src="https://i.ytimg.com/vi/9Wa0vKUDkgw/mqdefault.jpg" style="box-shadow: 0px 0px 5px #000000">
     </div>
+    <p style="font-size: 1rem;"><i>Чтобы ощутить максимальный эффект от напитка, его нужно пить горячим. Не стоит делать этого вечером: вы попросту не уснете. Пейте медленно, внимательно следя за реакцией организма. Эффект от напитка проявляется сразу: тут главное не переборщить. Если в какой-то момент вы почувствуете тошноту, отставьте чашку в сторону и положите на язык немного соли.</i></p>
+    <p>Удиви братков на зоне своим новоприобретённым знанием!</p>
+  </body>
 
-    <div id="input-container">
-        <div id="input-cards" class="container"></div>
-    </div>
-</div>
-
-<script src="js/mustache.min.js"></script>  <!--template system-->
-<script src="js/codemirror.min.js"></script>  <!--code textarea editor-->
-<script src="codemirror/addons.js"></script> <!--codemirror addons: matchbrackets, python mode, active line, auto refresh, mode/meta and loadmode -->
-<script src="js/prism.min.js"></script>  <!-- markdown code highlight -->
-<script src="js/FileSaver.min.js"></script>  <!-- saving files on the client-side -->
-<script src="js/jquery.min.js"></script>
-<script src="js/popper.min.js"></script>  <!-- tooltip engine -->
-<script src="js/bootstrap.min.js"></script>
-<script src="js/toastify.min.js"></script> <!-- toast -->
-<script src="js/bs-custom-file-input.min.js"></script> <!-- bootstrap custom file input-->
-<script src="js/purify.min.js"></script>  <!-- XSS sanitizer -->
-<script src="js/bootstrap-select.min.js"></script>
-<script>
-    if (window.navigator.userAgent.indexOf('MSIE ') !== -1 || window.navigator.userAgent.indexOf('Trident/') !== -1)
-        $('#output-container').html('<div class="alert alert-danger" role="alert"> Sorry, this website does not support IE browser. ☹ </div>');
-</script>
-<script src="pywebio.min.js"></script>
-
-
-<script src="require.min.js"></script> <!-- JS module loader -->
-
-<script>
-    if (window.WebIO === undefined) { // resource load failed
-        let url = new URL(window.location.href);
-        if (url.searchParams.get('_pywebio_cdn') === 'false') {
-            alert("Failed to load resource")
-        } else {
-            url.searchParams.set('_pywebio_cdn', 'false');
-            window.location.href = url.href;
-        }
-    }
-
-    require.config({
-        paths: {
-            'plotly': "https://cdn.plot.ly/plotly-latest.min",
-        },
-    });
-
-
-    $(function () {
-        // https://www.npmjs.com/package/bs-custom-file-input
-        bsCustomFileInput.init()
-    });
-
-    const urlparams = new URLSearchParams(window.location.search);
-    WebIO.startWebIOClient({
-        output_container_elem: $('#markdown-body'),
-        input_container_elem: $('#input-cards'),
-        backend_address: urlparams.get('pywebio_api') || '',
-        app_name: urlparams.get('app') || 'index',
-        protocol: "ws",
-        runtime_config: {
-            debug: urlparams.get('_pywebio_debug'),
-            outputAnimation: !urlparams.get('_pywebio_disable_animate'),
-            httpPullInterval: parseInt(urlparams.get('_pywebio_http_pull_interval') || 1000)
-        },
-    });
-</script>
-
-
-
-<footer class="footer">
-    Powered by <a href="https://www.pyweb.io/" target="_blank">PyWebIO</a>
-</footer>
-</body>
 </html>

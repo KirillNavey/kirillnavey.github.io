@@ -1,0 +1,27 @@
+body{
+    text-align: center;
+    background-color: rgb(29, 29, 29);
+    background-image: url(bg-main.png);
+    background-repeat: no-repeat;
+}
+.text{
+    color: rgb(255, 255, 255);
+    font-family: arial;
+}
+button{
+    border-radius: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
+    background-color: rgb(221, 221, 221);
+}
+button:hover{
+    background-color: white;
+    border-radius: 20px;
+}
+img{
+    width: 100%;
+}
+.table-item{
+    padding: 10px;
+    background-color: rgba(128, 128, 128, 0.281);
+}

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Тренировки</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Тренировки">
+  <link rel="apple-touch-icon" href="icon.png">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header><h1>План тренировок</h1></header>
+    <section class="user-input">
+      <h3>Введите свои данные</h3>
+      <div class="input-group">
+        <label>Рост (см): <input type="number" id="height" placeholder="185"></label>
+        <label>Вес (кг): <input type="number" id="weight" placeholder="59"></label>
+        <button onclick="suggestWeights()">Подобрать веса</button>
+      </div>
+    </section>
+    <nav class="tiles">
+      <div class="tile" onclick="showDay('day1')">
+        <span class="icon">💪</span>
+        <h3>Верх</h3>
+      </div>
+      <div class="tile" onclick="showDay('day3')">
+        <span class="icon">🦵</span>
+        <h3>Низ</h3>
+      </div>
+      <div class="tile" onclick="showDay('day5')">
+        <span class="icon">🏃</span>
+        <h3>Выносливость</h3>
+      </div>
+      <div class="tile" onclick="showDay('day7')">
+        <span class="icon">🏋️</span>
+        <h3>Обобщённый</h3>
+      </div>
+    </nav>
+    <main>
+      <section id="day1" class="day active">
+        <h2>День 1 — Верх</h2>
+        <button class="shuffle" onclick="shuffleExercises('day1')">Перемешать</button>
+        <ul id="exercises-day1">
+          <li>Жим лёжа — 4×8<div class="track">Вес: <input type="number" data-id="0w"> кг Повт: <input type="number" data-id="0r"></div></li>
+          <li>Тяга в наклоне — 4×10<div class="track">Вес: <input type="number" data-id="1w"> кг Повт: <input type="number" data-id="1r"></div></li>
+          <li>Жим гантелей сидя — 3×10<div class="track">Вес: <input type="number" data-id="2w"> кг Повт: <input type="number" data-id="2r"></div></li>
+          <li>Бицепс — 3×12<div class="track">Вес: <input type="number" data-id="3w"> кг Повт: <input type="number" data-id="3r"></div></li>
+          <li>Французский жим — 3×12<div class="track">Вес: <input type="number" data-id="4w"> кг Повт: <input type="number" data-id="4r"></div></li>
+        </ul>
+        <p class="tip"></p>
+      </section>
+      <section id="day3" class="day">
+        <h2>День 3 — Низ</h2>
+        <button class="shuffle" onclick="shuffleExercises('day3')">Перемешать</button>
+        <ul id="exercises-day3">
+          <li>Приседания со штангой — 4×10<div class="track">Вес: <input type="number" data-id="5w"> кг Повт: <input type="number" data-id="5r"></div></li>
+          <li>Румынская тяга — 4×10<div class="track">Вес: <input type="number" data-id="6w"> кг Повт: <input type="number" data-id="6r"></div></li>
+          <li>Выпады с гантелями — 3×12<div class="track">Вес: <input type="number" data-id="7w"> кг Повт: <input type="number" data-id="7r"></div></li>
+          <li>Подъёмы на носки — 3×15<div class="track">Вес: <input type="number" data-id="8w"> кг Повт: <input type="number" data-id="8r"></div></li>
+          <li>Планка — 3×30-40 сек<div class="track">Длительность: <input type="number" data-id="9t"> сек</div></li>
+        </ul>
+        <p class="tip"></p>
+      </section>
+      <section id="day5" class="day">
+        <h2>День 5 — Выносливость</h2>
+        <button class="shuffle" onclick="shuffleExercises('day5')">Перемешать</button>
+        <ul id="exercises-day5">
+          <li>Бёрпи — 3×10<div class="track">Повт: <input type="number" data-id="10r"></div></li>
+          <li>Скейтеры — 3×20<div class="track">Повт: <input type="number" data-id="11r"></div></li>
+          <li>Прыжки на скакалке — 3×1 мин<div class="track">Длительность: <input type="number" data-id="12t"> сек</div></li>
+          <li>Альпинист — 3×30 сек<div class="track">Длительность: <input type="number" data-id="13t"> сек</div></li>
+          <li>Велосипед (пресс) — 3×15<div class="track">Повт: <input type="number" data-id="14r"></div></li>
+        </ul>
+        <p class="tip"></p>
+      </section>
+      <section id="day7" class="day">
+        <h2>День 7 — Обобщённый</h2>
+        <button class="shuffle" onclick="shuffleExercises('day7')">Перемешать</button>
+        <ul id="exercises-day7">
+          <li>Становая тяга — 4×8<div class="track">Вес: <input type="number" data-id="15w"> кг Повт: <input type="number" data-id="15r"></div></li>
+          <li>Жим штанги стоя — 3×10<div class="track">Вес: <input type="number" data-id="16w"> кг Повт: <input type="number" data-id="16r"></div></li>
+          <li>Тяга штанги к поясу — 3×10<div class="track">Вес: <input type="number" data-id="17w"> кг Повт: <input type="number" data-id="17r"></div></li>
+          <li>Приседания с гантелями — 3×12<div class="track">Вес: <input type="number" data-id="18w"> кг Повт: <input type="number" data-id="18r"></div></li>
+          <li>Планка с подтягиванием коленей — 3×30 сек<div class="track">Длительность: <input type="number" data-id="19t"> сек</div></li>
+        </ul>
+        <p class="tip"></p>
+      </section>
+    </main>
+    <footer>
+      <button class="danger" onclick="resetProgress()">Сбросить прогресс</button>
+    </footer>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

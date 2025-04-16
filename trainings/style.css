@@ -1,0 +1,356 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: #f5f5f7;
+  color: #1d1d1f;
+  overscroll-behavior: none;
+}
+
+.app {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  min-height: 100vh;
+}
+
+header {
+  text-align: center;
+  padding: 20px 0;
+  background: linear-gradient(180deg, rgba(245,245,247,0.95), rgba(245,245,247,0.8));
+  position: sticky;
+  top: 0;
+  backdrop-filter: blur(10px);
+  z-index: 1;
+  animation: slideDown 0.5s ease-out;
+}
+
+h1 {
+  font-size: 28px;
+  font-weight: 700;
+  margin: 0;
+  color: #1d1d1f;
+}
+
+h2 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #1d1d1f;
+  margin-bottom: 16px;
+}
+
+h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1d1d1f;
+  margin-bottom: 12px;
+}
+
+.user-input {
+  background: #ffffff;
+  padding: 16px;
+  border-radius: 16px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+  margin-bottom: 20px;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.input-group {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.input-group label {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  color: #6e6e73;
+}
+
+.input-group input {
+  margin-top: 4px;
+  padding: 8px;
+  border: 1px solid #d2d2d7;
+  border-radius: 10px;
+  background: #f5f5f7;
+  font-size: 14px;
+  color: #1d1d1f;
+  width: 80px;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: #007aff;
+  transform: scale(1.02);
+}
+
+.input-group button {
+  padding: 10px 16px;
+  background: #007aff;
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.input-group button:hover {
+  background: #005bb5;
+  transform: scale(1.05);
+}
+
+.input-group button:active {
+  transform: scale(0.95);
+}
+
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.tile {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  animation: tileFadeIn 0.5s ease-out forwards;
+  opacity: 0;
+}
+
+.tile:nth-child(1) { animation-delay: 0.1s; }
+.tile:nth-child(2) { animation-delay: 0.2s; }
+.tile:nth-child(3) { animation-delay: 0.3s; }
+.tile:nth-child(4) { animation-delay: 0.4s; }
+
+.tile:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+}
+
+.tile:active {
+  transform: scale(0.98);
+}
+
+.tile .icon {
+  font-size: 24px;
+  margin-bottom: 8px;
+  transition: transform 0.3s ease;
+}
+
+.tile:hover .icon {
+  transform: scale(1.2);
+}
+
+.tile h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+  color: #1d1d1f;
+}
+
+main .day {
+  display: none;
+  animation: slideIn 0.5s ease-out;
+}
+
+main .day.active {
+  display: block;
+}
+
+.shuffle {
+  padding: 10px 16px;
+  background: #34c759;
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 16px;
+  transition: all 0.3s ease;
+}
+
+.shuffle:hover {
+  background: #28a745;
+  transform: scale(1.05);
+}
+
+.shuffle:active {
+  transform: scale(0.95);
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+li {
+  margin-bottom: 16px;
+  background: #ffffff;
+  padding: 16px;
+  border-radius: 16px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease;
+  animation: listItemFadeIn 0.5s ease-out forwards;
+  opacity: 0;
+}
+
+li:nth-child(1) { animation-delay: 0.1s; }
+li:nth-child(2) { animation-delay: 0.2s; }
+li:nth-child(3) { animation-delay: 0.3s; }
+li:nth-child(4) { animation-delay: 0.4s; }
+li:nth-child(5) { animation-delay: 0.5s; }
+
+li:hover {
+  transform: translateY(-2px);
+}
+
+.track {
+  margin-top: 10px;
+  display: flex;
+  gap: 12px;
+  font-size: 14px;
+  color: #6e6e73;
+}
+
+.track input {
+  width: 60px;
+  padding: 8px;
+  border: 1px solid #d2d2d7;
+  border-radius: 10px;
+  background: #f5f5f7;
+  font-size: 14px;
+  color: #1d1d1f;
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.track input:focus {
+  outline: none;
+  border-color: #007aff;
+  transform: scale(1.02);
+}
+
+.track input.update {
+  animation: weightUpdate 0.5s ease-in-out; /* Анимация изменения веса */
+}
+
+.tip {
+  margin-top: 20px;
+  font-style: italic;
+  color: #6e6e73;
+  background: #e5f0ff;
+  padding: 12px;
+  border-radius: 12px;
+  animation: fadeIn 0.5s ease-out;
+}
+
+footer {
+  text-align: center;
+  padding: 20px 0;
+}
+
+.danger {
+  padding: 10px 16px;
+  background: #ff3b30;
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.danger:hover {
+  background: #cc2e26;
+  transform: scale(1.05);
+}
+
+.danger:active {
+  transform: scale(0.95);
+}
+
+/* Анимации */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes tileFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes listItemFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes weightUpdate {
+  0% {
+    transform: scale(1);
+    background: #f5f5f7;
+  }
+  50% {
+    transform: scale(1.1);
+    background: #e5f0ff;
+  }
+  100% {
+    transform: scale(1);
+    background: #f5f5f7;
+  }
+}

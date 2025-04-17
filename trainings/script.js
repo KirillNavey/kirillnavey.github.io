@@ -41,6 +41,70 @@ const alternativeExercises = {
   ]
 };
 
+// Данные для каждого упражнения: базовый вес, повторения и коэффициент упражнения
+const exerciseData = {
+  "Жим лёжа": { baseWeight: 30, baseReps: 8, exerciseFactor: 1.2 },
+  "Тяга в наклоне": { baseWeight: 25, baseReps: 10, exerciseFactor: 1.1 },
+  "Жим гантелей сидя": { baseWeight: 15, baseReps: 10, exerciseFactor: 0.9 },
+  "Бицепс": { baseWeight: 10, baseReps: 12, exerciseFactor: 0.7 },
+  "Французский жим": { baseWeight: 10, baseReps: 12, exerciseFactor: 0.7 },
+  "Приседания со штангой": { baseWeight: 35, baseReps: 10, exerciseFactor: 1.3 },
+  "Румынская тяга": { baseWeight: 30, baseReps: 10, exerciseFactor: 1.2 },
+  "Выпады с гантелями": { baseWeight: 15, baseReps: 12, exerciseFactor: 0.9 },
+  "Подъёмы на носки": { baseWeight: 20, baseReps: 15, exerciseFactor: 0.8 },
+  "Планка": { baseReps: 30 },
+  "Бёрпи": { baseReps: 10 },
+  "Скейтеры": { baseReps: 20 },
+  "Прыжки на скакалке": { baseReps: 60 },
+  "Альпинист": { baseReps: 30 },
+  "Велосипед (пресс)": { baseReps: 15 },
+  "Становая тяга": { baseWeight: 40, baseReps: 8, exerciseFactor: 1.4 },
+  "Жим штанги стоя": { baseWeight: 20, baseReps: 10, exerciseFactor: 1.0 },
+  "Тяга штанги к поясу": { baseWeight: 25, baseReps: 10, exerciseFactor: 1.1 },
+  "Приседания с гантелями": { baseWeight: 15, baseReps: 12, exerciseFactor: 0.9 },
+  "Планка с подтягиванием коленей": { baseReps: 30 }
+};
+
+// Сохраняем исходные упражнения для каждого дня
+const originalExercises = {
+  day1: [
+    { name: "Жим лёжа", sets: "4×8", track: "Вес: <input type='number' data-id='0w'> кг Повт: <input type='number' data-id='0r'>", exercise: "Жим лёжа" },
+    { name: "Тяга в наклоне", sets: "4×10", track: "Вес: <input type='number' data-id='1w'> кг Повт: <input type='number' data-id='1r'>", exercise: "Тяга в наклоне" },
+    { name: "Жим гантелей сидя", sets: "3×10", track: "Вес: <input type='number' data-id='2w'> кг Повт: <input type='number' data-id='2r'>", exercise: "Жим гантелей сидя" },
+    { name: "Бицепс", sets: "3×12", track: "Вес: <input type='number' data-id='3w'> кг Повт: <input type='number' data-id='3r'>", exercise: "Бицепс" },
+    { name: "Французский жим", sets: "3×12", track: "Вес: <input type='number' data-id='4w'> кг Повт: <input type='number' data-id='4r'>", exercise: "Французский жим" }
+  ],
+  day3: [
+    { name: "Приседания со штангой", sets: "4×10", track: "Вес: <input type='number' data-id='5w'> кг Повт: <input type='number' data-id='5r'>", exercise: "Приседания со штангой" },
+    { name: "Румынская тяга", sets: "4×10", track: "Вес: <input type='number' data-id='6w'> кг Повт: <input type='number' data-id='6r'>", exercise: "Румынская тяга" },
+    { name: "Выпады с гантелями", sets: "3×12", track: "Вес: <input type='number' data-id='7w'> кг Повт: <input type='number' data-id='7r'>", exercise: "Выпады с гантелями" },
+    { name: "Подъёмы на носки", sets: "3×15", track: "Вес: <input type='number' data-id='8w'> кг Повт: <input type='number' data-id='8r'>", exercise: "Подъёмы на носки" },
+    { name: "Планка", sets: "3×30-40 сек", track: "Длительность: <input type='number' data-id='9t'> сек", exercise: "Планка" }
+  ],
+  day5: [
+    { name: "Бёрпи", sets: "3×10", track: "Повт: <input type='number' data-id='10r'>", exercise: "Бёрпи" },
+    { name: "Скейтеры", sets: "3×20", track: "Повт: <input type='number' data-id='11r'>", exercise: "Скейтеры" },
+    { name: "Прыжки на скакалке", sets: "3×1 мин", track: "Длительность: <input type='number' data-id='12t'> сек", exercise: "Прыжки на скакалке" },
+    { name: "Альпинист", sets: "3×30 сек", track: "Длительность: <input type='number' data-id='13t'> сек", exercise: "Альпинист" },
+    { name: "Велосипед (пресс)", sets: "3×15", track: "Повт: <input type='number' data-id='14r'>", exercise: "Велосипед (пресс)" }
+  ],
+  day7: [
+    { name: "Становая тяга", sets: "4×8", track: "Вес: <input type='number' data-id='15w'> кг Повт: <input type='number' data-id='15r'>", exercise: "Становая тяга" },
+    { name: "Жим штанги стоя", sets: "3×10", track: "Вес: <input type='number' data-id='16w'> кг Повт: <input type='number' data-id='16r'>", exercise: "Жим штанги стоя" },
+    { name: "Тяга штанги к поясу", sets: "3×10", track: "Вес: <input type='number' data-id='17w'> кг Повт: <input type='number' data-id='17r'>", exercise: "Тяга штанги к поясу" },
+    { name: "Приседания с гантелями", sets: "3×12", track: "Вес: <input type='number' data-id='18w'> кг Повт: <input type='number' data-id='18r'>", exercise: "Приседания с гантелями" },
+    { name: "Планка с подтягиванием коленей", sets: "3×30 сек", track: "Длительность: <input type='number' data-id='19t'> сек", exercise: "Планка с подтягиванием коленей" }
+  ]
+};
+
+// Состояние перемешивания для каждого дня (original или shuffled)
+const shuffleState = {
+  day1: 'original',
+  day3: 'original',
+  day5: 'original',
+  day7: 'original'
+};
+
 // Функции для работы с cookies
 function setCookie(name, value, days) {
   const expires = new Date();
@@ -69,20 +133,15 @@ function areAllExercisesCompleted() {
   return true;
 }
 
-// Функция для обновления отображения текущей недели с анимацией
+// Функция для обновления отображения текущей недели
 function updateWeekDisplay() {
   const currentWeek = localStorage.getItem('currentWeek') || '1';
   const weekDisplay = document.getElementById('current-week');
-  const weekHeader = document.getElementById('week-header');
-  if (weekDisplay && weekHeader) {
+  if (weekDisplay) {
     weekDisplay.textContent = currentWeek;
-    console.log('Обновление недели:', currentWeek); // Отладка
-    weekHeader.classList.remove('week-animate'); // Сбрасываем анимацию
-    void weekHeader.offsetWidth; // Принудительно перезапускаем анимацию
-    weekHeader.classList.add('week-animate'); // Запускаем анимацию
-    console.log('Анимация запущена для week-header'); // Отладка
+    console.log('Обновление недели:', currentWeek);
   } else {
-    console.error('Элемент #week-header или #current-week не найден'); // Отладка
+    console.error('Элемент #current-week не найден');
   }
 }
 
@@ -117,20 +176,17 @@ function saveExerciseProgress(exercise, weight, reps, time) {
 }
 
 function loadProgress() {
-  // Загрузка текущей недели
   if (!localStorage.getItem('currentWeek')) {
     localStorage.setItem('currentWeek', '1');
   }
   updateWeekDisplay();
 
-  // Загрузка данных из localStorage
   inputs.forEach(input => {
     const saved = localStorage.getItem(input.dataset.id);
     if (saved !== null) input.value = saved;
     checkInputs(input);
   });
 
-  // Загрузка данных из cookies
   const savedInputs = getCookie('userInputs');
   if (savedInputs) {
     const parsed = JSON.parse(savedInputs);
@@ -143,7 +199,6 @@ function loadProgress() {
     });
   }
 
-  // Загрузка выполненных упражнений
   const completedExercises = getCookie('completedExercises');
   if (completedExercises) {
     const parsed = JSON.parse(completedExercises);
@@ -164,14 +219,12 @@ function loadProgress() {
     showDay(lastDay);
   }
 
-  // Загрузка темы
   const theme = getCookie('theme');
   if (theme === 'dark') {
     document.body.classList.add('dark');
     document.querySelector('.theme-toggle').textContent = '☀️';
   }
 
-  // Загрузка предложенных весов
   const suggestedWeights = getCookie('suggestedWeights');
   if (suggestedWeights) {
     const weights = JSON.parse(suggestedWeights);
@@ -187,6 +240,25 @@ function loadProgress() {
     });
   }
 
+  // Загрузка сохранённых значений для полей роста и веса
+  const savedHeight = localStorage.getItem('height');
+  if (savedHeight) {
+    document.getElementById('height').value = savedHeight;
+  }
+
+  const savedWeight = localStorage.getItem('weight');
+  if (savedWeight) {
+    document.getElementById('weight').value = savedWeight;
+  }
+
+  const savedTrainingLevel = localStorage.getItem('training-level');
+  if (savedTrainingLevel) {
+    const text = savedTrainingLevel === 'beginner' ? 'Новичок' :
+                savedTrainingLevel === 'intermediate' ? 'Средний' : 'Продвинутый';
+    document.getElementById('training-level-selected').textContent = text;
+    document.getElementById('training-level-selected').dataset.value = savedTrainingLevel;
+  }
+
   updateAchievements();
 }
 
@@ -194,6 +266,16 @@ function saveProgress() {
   inputs.forEach(input => {
     localStorage.setItem(input.dataset.id, input.value);
   });
+
+  // Сохранение значений роста и веса
+  const heightInput = document.getElementById('height');
+  const weightInput = document.getElementById('weight');
+  if (heightInput.value) {
+    localStorage.setItem('height', heightInput.value);
+  }
+  if (weightInput.value) {
+    localStorage.setItem('weight', weightInput.value);
+  }
 
   const userInputs = {};
   inputs.forEach(input => {
@@ -247,6 +329,13 @@ function resetProgress() {
     setCookie('completedExercises', '', -1);
     localStorage.removeItem('exerciseProgress');
     localStorage.setItem('currentWeek', '1');
+    localStorage.removeItem('height');
+    localStorage.removeItem('weight');
+    localStorage.removeItem('training-level');
+    document.getElementById('height').value = '';
+    document.getElementById('weight').value = '';
+    document.getElementById('training-level-selected').textContent = 'Выберите уровень';
+    document.getElementById('training-level-selected').dataset.value = '';
     updateWeekDisplay();
     updateAchievements();
   }
@@ -378,109 +467,16 @@ function showDay(id) {
   setCookie('lastDay', id, 30);
 }
 
-function suggestWeights() {
-  const height = +document.getElementById('height').value / 100;
-  const weight = +document.getElementById('weight').value;
-  if (!height || !weight) {
-    alert("Пожалуйста, введите рост и вес.");
-    return;
-  }
-
-  const bmi = weight / (height * height);
-  let weightSuggestion, repSuggestion, timeSuggestion;
-
-  if (bmi < 18.5) {
-    weightSuggestion = 10;
-    repSuggestion = 12;
-  } else if (bmi <= 24.9) {
-    weightSuggestion = 20;
-    repSuggestion = 10;
-  } else {
-    weightSuggestion = 30;
-    repSuggestion = 8;
-  }
-  document.querySelectorAll('#exercises-day1 li').forEach((li, index) => {
-    const suggestedSpan = li.querySelector('.suggested-weight');
-    suggestedSpan.textContent = index < 4 ? `(Предложено: ${weightSuggestion} кг, ${repSuggestion} повт.)` : `(Предложено: ${repSuggestion} повт.)`;
-    suggestedSpan.classList.add('show');
-  });
-
-  if (bmi < 18.5) {
-    weightSuggestion = 15;
-    repSuggestion = 12;
-    timeSuggestion = 30;
-  } else if (bmi <= 24.9) {
-    weightSuggestion = 25;
-    repSuggestion = 10;
-    timeSuggestion = 40;
-  } else {
-    weightSuggestion = 35;
-    repSuggestion = 8;
-    timeSuggestion = 50;
-  }
-  document.querySelectorAll('#exercises-day3 li').forEach((li, index) => {
-    const suggestedSpan = li.querySelector('.suggested-weight');
-    if (index < 4) {
-      suggestedSpan.textContent = `(Предложено: ${weightSuggestion} кг, ${repSuggestion} повт.)`;
-    } else {
-      suggestedSpan.textContent = `(Предложено: ${timeSuggestion} сек)`;
-    }
-    suggestedSpan.classList.add('show');
-  });
-
-  if (bmi < 18.5) {
-    repSuggestion = 15;
-    timeSuggestion = 60;
-  } else if (bmi <= 24.9) {
-    repSuggestion = 12;
-    timeSuggestion = 40;
-  } else {
-    repSuggestion = 10;
-    timeSuggestion = 50;
-  }
-  document.querySelectorAll('#exercises-day5 li').forEach((li, index) => {
-    const suggestedSpan = li.querySelector('.suggested-weight');
-    if (index === 2 || index === 3) {
-      suggestedSpan.textContent = `(Предложено: ${timeSuggestion} сек)`;
-    } else {
-      suggestedSpan.textContent = `(Предложено: ${repSuggestion} повт.)`;
-    }
-    suggestedSpan.classList.add('show');
-  });
-
-  if (bmi < 18.5) {
-    weightSuggestion = 12;
-    repSuggestion = 12;
-    timeSuggestion = 30;
-  } else if (bmi <= 24.9) {
-    weightSuggestion = 20;
-    repSuggestion = 10;
-    timeSuggestion = 40;
-  } else {
-    weightSuggestion = 30;
-    repSuggestion = 8;
-    timeSuggestion = 50;
-  }
-  document.querySelectorAll('#exercises-day7 li').forEach((li, index) => {
-    const suggestedSpan = li.querySelector('.suggested-weight');
-    if (index < 4) {
-      suggestedSpan.textContent = `(Предложено: ${weightSuggestion} кг, ${repSuggestion} повт.)`;
-    } else {
-      suggestedSpan.textContent = `(Предложено: ${timeSuggestion} сек)`;
-    }
-    suggestedSpan.classList.add('show');
-  });
-
-  saveSuggestedWeights();
-  showTips();
-}
-
 function shuffleExercises(dayId) {
   const exercisesList = document.getElementById(`exercises-${dayId}`);
   exercisesList.style.opacity = '0';
+
+  // Переключаем состояние: original → shuffled → original → ...
+  shuffleState[dayId] = shuffleState[dayId] === 'original' ? 'shuffled' : 'original';
+  const newExercises = shuffleState[dayId] === 'shuffled' ? alternativeExercises[dayId] : originalExercises[dayId];
+
   setTimeout(() => {
-    const alternatives = alternativeExercises[dayId];
-    exercisesList.innerHTML = alternatives.map(ex => `
+    exercisesList.innerHTML = newExercises.map(ex => `
       <li data-exercise="${ex.exercise}">${ex.name} — ${ex.sets} <span class="suggested-weight"></span><div class="track">${ex.track}</div><button class="complete-btn" onclick="completeExercise(this)" disabled>Выполнено</button></li>
     `).join('');
     exercisesList.style.opacity = '1';
@@ -492,6 +488,106 @@ function shuffleExercises(dayId) {
     saveSuggestedWeights();
     saveCompletedExercises();
   }, 300);
+}
+
+function suggestWeights() {
+  const heightInput = document.getElementById('height');
+  const weightInput = document.getElementById('weight');
+  const height = +heightInput.value / 100;
+  const weight = +weightInput.value;
+  const trainingLevel = document.getElementById('training-level-selected').dataset.value;
+
+  if (!height || !weight || !trainingLevel) {
+    alert("Пожалуйста, укажите рост, вес и уровень подготовки.");
+    return;
+  }
+
+  const bmi = weight / (height * height);
+
+  let bmiFactor = 1.0;
+  if (bmi < 18.5) bmiFactor = 0.9;
+  else if (bmi > 24.9) bmiFactor = 1.1;
+
+  let levelFactor;
+  let repLevelFactor;
+  switch (trainingLevel) {
+    case 'beginner':
+      levelFactor = 0.8;
+      repLevelFactor = 1.2;
+      break;
+    case 'intermediate':
+      levelFactor = 1.0;
+      repLevelFactor = 1.0;
+      break;
+    case 'advanced':
+      levelFactor = 1.2;
+      repLevelFactor = 0.8;
+      break;
+    default:
+      levelFactor = 1.0;
+      repLevelFactor = 1.0;
+  }
+
+  document.querySelectorAll('#exercises-day1 li').forEach((li, index) => {
+    const exercise = li.dataset.exercise;
+    const data = exerciseData[exercise];
+    const suggestedSpan = li.querySelector('.suggested-weight');
+    if (data.baseWeight) {
+      const weight = Math.round(data.baseWeight * bmiFactor * levelFactor * data.exerciseFactor);
+      const reps = Math.round(data.baseReps / repLevelFactor);
+      suggestedSpan.textContent = `(Предложено: ${weight} кг, ${reps} повт.)`;
+    } else {
+      const reps = Math.round(data.baseReps / repLevelFactor);
+      suggestedSpan.textContent = `(Предложено: ${reps} повт.)`;
+    }
+    suggestedSpan.classList.add('show');
+  });
+
+  document.querySelectorAll('#exercises-day3 li').forEach((li, index) => {
+    const exercise = li.dataset.exercise;
+    const data = exerciseData[exercise];
+    const suggestedSpan = li.querySelector('.suggested-weight');
+    if (data.baseWeight) {
+      const weight = Math.round(data.baseWeight * bmiFactor * levelFactor * data.exerciseFactor);
+      const reps = Math.round(data.baseReps / repLevelFactor);
+      suggestedSpan.textContent = `(Предложено: ${weight} кг, ${reps} повт.)`;
+    } else {
+      const reps = Math.round(data.baseReps / repLevelFactor);
+      suggestedSpan.textContent = `(Предложено: ${reps} сек)`;
+    }
+    suggestedSpan.classList.add('show');
+  });
+
+  document.querySelectorAll('#exercises-day5 li').forEach((li, index) => {
+    const exercise = li.dataset.exercise;
+    const data = exerciseData[exercise];
+    const suggestedSpan = li.querySelector('.suggested-weight');
+    const reps = Math.round(data.baseReps / repLevelFactor);
+    if (exercise === "Прыжки на скакалке" || exercise === "Альпинист") {
+      suggestedSpan.textContent = `(Предложено: ${reps} сек)`;
+    } else {
+      suggestedSpan.textContent = `(Предложено: ${reps} повт.)`;
+    }
+    suggestedSpan.classList.add('show');
+  });
+
+  document.querySelectorAll('#exercises-day7 li').forEach((li, index) => {
+    const exercise = li.dataset.exercise;
+    const data = exerciseData[exercise];
+    const suggestedSpan = li.querySelector('.suggested-weight');
+    if (data.baseWeight) {
+      const weight = Math.round(data.baseWeight * bmiFactor * levelFactor * data.exerciseFactor);
+      const reps = Math.round(data.baseReps / repLevelFactor);
+      suggestedSpan.textContent = `(Предложено: ${weight} кг, ${reps} повт.)`;
+    } else {
+      const reps = Math.round(data.baseReps / repLevelFactor);
+      suggestedSpan.textContent = `(Предложено: ${reps} сек)`;
+    }
+    suggestedSpan.classList.add('show');
+  });
+
+  saveSuggestedWeights();
+  showTips();
 }
 
 function toggleTheme() {
@@ -578,6 +674,32 @@ function updateAchievements() {
     achievementsList.innerHTML = '<li>Нет данных о достижениях. Выполните упражнения, чтобы увидеть прогресс.</li>';
   }
 }
+
+// Логика для кастомного выпадающего списка (только для уровня подготовки)
+function toggleCustomSelect() {
+  const options = document.getElementById('training-level-options');
+  if (options.classList.contains('open')) {
+    options.classList.add('closing');
+    options.addEventListener('animationend', () => {
+      options.classList.remove('open', 'closing');
+    }, { once: true });
+  } else {
+    options.classList.remove('closing');
+    options.classList.add('open');
+  }
+}
+
+function selectOption(value, text) {
+  const selected = document.getElementById('training-level-selected');
+  selected.textContent = text;
+  selected.dataset.value = value;
+  localStorage.setItem('training-level', value);
+  toggleCustomSelect();
+}
+
+// Добавляем слушатели событий для полей роста и веса
+document.getElementById('height').addEventListener('input', saveProgress);
+document.getElementById('weight').addEventListener('input', saveProgress);
 
 inputs.forEach(input => {
   input.addEventListener('input', saveProgress);

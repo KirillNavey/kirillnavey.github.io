@@ -22,7 +22,7 @@
       <nav class="sidebar-menu">
         <button class="menu-item active" onclick="showPage('training-plan')">План тренировок</button>
         <button class="menu-item" onclick="showPage('progress')">Прогресс</button>
-        <button class="reset-btn" onclick="resetProgress()">Сбросить прогресс</button>
+        <button class="danger" onclick="resetProgress()">Сбросить прогресс</button>
       </nav>
     </div>
 
@@ -38,10 +38,29 @@
         <section class="user-input">
           <h3>Введите свои данные</h3>
           <div class="input-group">
-            <label>Рост (см): <input type="number" id="height" placeholder="185"></label>
-            <label>Вес (кг): <input type="number" id="weight" placeholder="59"></label>
-            <button onclick="suggestWeights()">Подобрать веса</button>
+            <label for="height">Рост (см):</label>
+            <div class="custom-input">
+              <input type="number" id="height" placeholder="Введите рост">
+            </div>
           </div>
+          <div class="input-group">
+            <label for="weight">Вес (кг):</label>
+            <div class="custom-input">
+              <input type="number" id="weight" placeholder="Введите вес">
+            </div>
+          </div>
+          <div class="input-group">
+            <label for="training-level">Уровень подготовки:</label>
+            <div class="custom-select">
+              <div class="selected-option" id="training-level-selected" onclick="toggleCustomSelect()">Выберите уровень</div>
+              <div class="options" id="training-level-options">
+                <div class="option" data-value="beginner" onclick="selectOption('beginner', 'Новичок')">Новичок</div>
+                <div class="option" data-value="intermediate" onclick="selectOption('intermediate', 'Средний')">Средний</div>
+                <div class="option" data-value="advanced" onclick="selectOption('advanced', 'Продвинутый')">Продвинутый</div>
+              </div>
+            </div>
+          </div>
+          <button class="suggest-btn" onclick="suggestWeights()">Подобрать веса</button>
         </section>
         <nav class="tiles">
           <div class="tile" onclick="showDay('day1')">

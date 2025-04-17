@@ -55,6 +55,10 @@ body.dark .sidebar-header {
   margin: 0;
 }
 
+body.dark .close-sidebar{
+  color: white;
+}
+
 .close-sidebar {
   background: none;
   border: none;
@@ -121,6 +125,7 @@ body.dark .menu-item.active {
   display: block;
 }
 
+
 header {
   text-align: center;
   padding: 20px 0;
@@ -133,10 +138,15 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  scale: 1.12;
 }
 
 body.dark header {
   background: linear-gradient(180deg, rgba(28,37,38,0.95), rgba(28,37,38,0.8));
+}
+
+body.dark .menu-toggle {
+  color: white;
 }
 
 .menu-toggle {

@@ -1,0 +1,220 @@
+/* Базовые стили */
+body {
+  margin: 0;
+  padding: 0;
+  background: #10121e;
+  color: #fffbe6;
+  font-family: 'Montserrat', Arial, sans-serif;
+  min-height: 100vh;
+}
+
+main {
+  max-width: 820px;
+  margin: 40px auto 32px auto;
+  background: rgba(24,28,43,0.98);
+  border-radius: 18px;
+  box-shadow: 0 8px 40px #000a;
+  padding: 32px 32px 24px 32px;
+}
+
+header {
+  background: transparent;
+  padding: 24px 0 0 0;
+  text-align: center;
+}
+
+nav {
+  margin-bottom: 18px;
+}
+.nav-link {
+  color: #ffd700;
+  text-decoration: none;
+  font-weight: bold;
+  margin: 0 18px;
+  font-size: 18px;
+  transition: color 0.2s;
+}
+.nav-link:hover {
+  color: #fffbe6;
+  text-shadow: 0 0 8px #ffd70088;
+}
+
+.hero {
+  text-align: center;
+  margin-bottom: 36px;
+}
+.logo {
+  width: 120px;
+  height: 120px;
+  margin-bottom: 8px;
+}
+h1 {
+  font-family: 'Orbitron', Arial, sans-serif;
+  font-size: 2.7em;
+  color: #ffd700;
+  margin: 0 0 8px 0;
+  letter-spacing: 2px;
+}
+.subtitle {
+  font-size: 1.2em;
+  color: #fffbe6;
+  margin-bottom: 18px;
+}
+
+.main-btn {
+  display: inline-block;
+  background: linear-gradient(90deg, #ffd700 60%, #fffbe6 100%);
+  color: #23264a;
+  font-weight: bold;
+  font-size: 1.15em;
+  padding: 13px 32px;
+  border: none;
+  border-radius: 12px;
+  margin: 10px 10px 0 0;
+  text-decoration: none;
+  box-shadow: 0 4px 18px #0006;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+.main-btn:hover, .main-btn:focus {
+  background: linear-gradient(90deg, #fffbe6 60%, #ffd700 100%);
+  color: #181c2b;
+  box-shadow: 0 6px 24px #ffd70055;
+}
+
+.section {
+  margin-bottom: 36px;
+  background: rgba(35,38,74,0.85);
+  border-radius: 12px;
+  padding: 24px 24px 18px 24px;
+  box-shadow: 0 2px 12px #0003;
+}
+
+h2 {
+  color: #ffd700;
+  font-family: 'Orbitron', Arial, sans-serif;
+  font-size: 1.5em;
+  margin-top: 0;
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+}
+
+.features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-bottom: 8px;
+}
+.feature {
+  flex: 1 1 220px;
+  background: #23264a;
+  border-radius: 10px;
+  padding: 16px 14px;
+  margin-bottom: 0;
+  color: #fffbe6;
+  font-size: 1em;
+  box-shadow: 0 2px 8px #0002;
+}
+
+.gold {
+  color: #ffd700;
+}
+
+.mod-link {
+  color: #ffd700;
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+.mod-link:hover {
+  color: #fffbe6;
+}
+
+.code-block {
+  background: #181c2b;
+  color: #ffd700;
+  font-family: 'Fira Mono', 'Consolas', monospace;
+  padding: 7px 14px;
+  border-radius: 7px;
+  margin: 7px 0;
+  display: inline-block;
+  font-size: 1em;
+  box-shadow: 0 1px 4px #0003;
+}
+
+.mod-tip {
+  background: #23264a;
+  color: #fffbe6;
+  border-left: 5px solid #ffd700;
+  padding: 12px 18px;
+  border-radius: 8px;
+  margin: 16px 0 12px 0;
+  font-size: 1em;
+}
+
+footer {
+  text-align: center;
+  color: #ffd700;
+  background: transparent;
+  padding: 18px 0 12px 0;
+  font-size: 1em;
+  letter-spacing: 1px;
+}
+
+/* Модальное окно демо */
+#demo-modal {
+  display: none;
+  position: fixed;
+  left: 0; top: 0;
+  width: 100vw; height: 100vh;
+  background: #10121ee0;
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+#demo-modal[style*="display: flex"] {
+  display: flex !important;
+}
+#demo-modal .main-btn {
+  margin: 0;
+}
+#demo-modal canvas {
+  background: #181c2b;
+  box-shadow: 0 8px 40px #000a;
+  border-radius: 18px;
+  border: 3px solid #23264a;
+  display: block;
+}
+#close-demo-btn {
+  position: absolute;
+  right: -16px;
+  top: -16px;
+  background: #23264a;
+  color: #ffd700;
+  border: none;
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  font-size: 28px;
+  cursor: pointer;
+  z-index: 10;
+  transition: background 0.2s, color 0.2s;
+}
+#close-demo-btn:hover {
+  background: #ffd700;
+  color: #23264a;
+}
+
+@media (max-width: 1100px) {
+  main { max-width: 98vw; padding: 12px 2vw 12px 2vw; }
+  .features { flex-direction: column; }
+}
+@media (max-width: 1050px) {
+  #demo-modal canvas { width: 95vw !important; height: auto !important; max-width: 1000px; }
+}
+@media (max-width: 700px) {
+  main { padding: 6px 0 6px 0; }
+  .section { padding: 12px 8px 10px 8px; }
+  .feature { font-size: 0.98em; }
+  #demo-modal canvas { width: 98vw !important; height: auto !important; }
+  .main-btn { font-size: 1em; padding: 10px 12px; }
+}

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Space Mouse Flyer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Space Mouse Flyer — аркадный космический шутер с поддержкой модов.">
+  <link href="https://fonts.googleapis.com/css?family=Orbitron:700|Montserrat:400,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <canvas id="bg"></canvas>
+  <header>
+    <nav>
+      <a href="#about" class="nav-link">О игре</a>
+      <a href="#features" class="nav-link">Особенности</a>
+      <a href="#modding" class="nav-link">Моды</a>
+      <a href="#install" class="nav-link">Установка</a>
+      <a href="#contacts" class="nav-link">Контакты</a>
+    </nav>
+  </header>
+  <main>
+    <section class="hero">
+      <svg class="logo" viewBox="0 0 120 120">
+        <defs>
+          <radialGradient id="planetGlow" cx="50%" cy="50%" r="60%">
+            <stop offset="0%" stop-color="#fffbe6" stop-opacity="1"/>
+            <stop offset="80%" stop-color="#ffd700" stop-opacity="0.7"/>
+            <stop offset="100%" stop-color="#23264a" stop-opacity="0"/>
+          </radialGradient>
+          <linearGradient id="ringGrad" x1="0%" y1="50%" x2="100%" y2="50%">
+            <stop offset="0%" stop-color="#ffd700" stop-opacity="0.2"/>
+            <stop offset="50%" stop-color="#fffbe6" stop-opacity="0.7"/>
+            <stop offset="100%" stop-color="#ffd700" stop-opacity="0.2"/>
+          </linearGradient>
+        </defs>
+        <circle cx="60" cy="62" r="38" fill="url(#planetGlow)" stroke="#ffd700" stroke-width="4"/>
+        <ellipse cx="60" cy="70" rx="54" ry="14" fill="url(#ringGrad)" stroke="#ffd700" stroke-width="2" opacity="0.7"/>
+        <ellipse cx="60" cy="80" rx="30" ry="7" fill="#23264a" opacity="0.25"/>
+      </svg>
+      <h1>Space Mouse Flyer</h1>
+      <div class="subtitle">Аркадный космический шутер с поддержкой модов</div>
+      <a class="main-btn" href="https://github.com/KirillNavey/space-mouse-flyer" target="_blank">🚀 Скачать с GitHub</a>
+      <a class="main-btn" id="play-demo-btn" href="\play.html">🎮 Поиграть в демо</a>
+    </section>
+    <section id="about" class="section">
+      <h2>О игре</h2>
+      <p>
+        <b>Space Mouse Flyer</b> — это динамичная аркада, где вы управляете космической мышью, сражаетесь с волнами врагов, уклоняетесь от метеоров и собираете бонусы.<br>
+        <span class="gold">Игра создана для удовольствия — и для творчества!</span>
+      </p>
+    </section>
+    <section id="features" class="section">
+      <h2>Особенности</h2>
+      <div class="features">
+        <div class="feature"><b>Динамичный геймплей</b><br>Летайте, стреляйте, уклоняйтесь, выживайте!</div>
+        <div class="feature"><b>Разнообразные враги и бонусы</b><br>Обычные, быстрые, танки, зигзаги, щиты, лечение и многое другое.</div>
+        <div class="feature"><b>Случайные события</b><br>Метеоритные дожди, чёрные дыры и другие космические опасности.</div>
+        <div class="feature"><b>Система достижений</b><br>Получайте награды за особые успехи и испытания.</div>
+        <div class="feature"><b>Мощная система модов</b><br>Меняйте всё: механику, графику, звук, врагов, бонусы, достижения и даже сам игровой процесс!</div>
+        <div class="feature"><b>Сохранение прогресса</b><br>Ваши достижения и статистика сохраняются между сессиями.</div>
+      </div>
+    </section>
+    <section id="modding" class="section">
+      <h2>Модификации</h2>
+      <p>
+        <b>Space Mouse Flyer</b> — одна из самых гибких игр для моддинга на Pygame.<br>
+        <span class="gold">Любой</span> может создать мод, который меняет механику, графику, звук, врагов, бонусы, достижения и даже сам игровой процесс!
+      </p>
+      <div class="mod-tip">
+        <strong>Как создать мод?</strong><br>
+        1. Создайте файл <code>my_mod.py</code> в папке <code>mods/</code>.<br>
+        2. Определите функцию <code>apply_mod(game)</code>:
+      </div>
+      <div class="code-block">
+def apply_mod(game):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;game["set_fps"](144)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;game["player"].color = (255, 0, 255)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;print("Мой мод активирован!")
+      </div>
+      <p>
+        <b>Всё о создании модов:</b> <a class="mod-link" href="https://github.com/KirillNavey/space-mouse-flyer/blob/main/MODIFICATION_API.md" target="_blank">MODIFICATION_API.md</a>
+      </p>
+    </section>
+    <section id="install" class="section">
+      <h2>Установка и запуск</h2>
+      <ol>
+        <li>Установите Python 3.7+ и Pygame 2.0+:
+          <div class="code-block">pip install pygame</div>
+        </li>
+        <li>Скачайте или клонируйте репозиторий с GitHub.</li>
+        <li>Запустите игру:
+          <div class="code-block">python run.py</div>
+        </li>
+        <li>Для модов — просто добавьте файл в <code>mods/</code>!</li>
+      </ol>
+    </section>
+    <section id="contacts" class="section">
+      <h2>Контакты и обратная связь</h2>
+      <ul>
+        <li>GitHub: <a class="mod-link" href="https://github.com/KirillNavey/space-mouse-flyer" target="_blank">KirillNavey/space-mouse-flyer</a></li>
+        <li>Автор: <b>KirillNavey</b></li>
+        <li>Лицензия: MIT License</li>
+        <li>Почта для связи: <i>укажите свой email или GitHub</i></li>
+      </ul>
+    </section>
+  </main>
+  <footer>
+    <span class="gold">&copy; 2025 KirillNavey — Space Mouse Flyer</span><br>
+    Powered by Python &amp; Pygame | <a href="https://github.com/KirillNavey/space-mouse-flyer" class="mod-link">GitHub</a>
+  </footer>
+  <script src="main.js"></script>
+</body>
+</html>

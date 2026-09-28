@@ -2,112 +2,180 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Space Mouse Flyer</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Space Mouse Flyer — аркадный космический шутер с поддержкой модов.">
-  <link href="https://fonts.googleapis.com/css?family=Orbitron:700|Montserrat:400,700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NOVA PC — Сервис и сборка ПК премиального уровня</title>
+  <style>
+    :root {
+      --bg: #000000;
+      --card-bg: rgba(22, 22, 23, 0.6);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --text: #f5f5f7;
+      --text-sub: #86868b;
+      --accent: #0071e3;
+    }
+    
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif; }
+    body { background-color: var(--bg); color: var(--text); overflow-x: hidden; -webkit-font-smoothing: antialiased; letter-spacing: -0.01em; }
+    
+    .gradient-bg { position: fixed; top: -20%; left: -10%; width: 130vw; height: 130vh; background: radial-gradient(circle at 20% 30%, #0d1224 0%, transparent 40%), radial-gradient(circle at 80% 70%, #081610 0%, transparent 45%); z-index: -1; filter: blur(60px); opacity: 0.8; }
+
+    header { position: fixed; top: 0; width: 100%; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.05); z-index: 100; }
+    .nav-container { max-width: 1024px; margin: 0 auto; height: 44px; display: flex; justify-content: space-between; align-items: center; padding: 0 22px; }
+    .logo { font-weight: 500; font-size: 14px; letter-spacing: -0.2px; opacity: 0.92; }
+    .nav-links a { color: var(--text-sub); text-decoration: none; font-size: 12px; margin-left: 24px; transition: color 0.25s cubic-bezier(0.25, 0.1, 0.25, 1); }
+    .nav-links a:hover { color: var(--text); }
+
+    .hero { min-height: 95vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 140px 22px 60px; position: relative; }
+    .hero-tag { background: linear-gradient(90deg, #86868b, #f5f5f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px; }
+    
+    .hero h1 { font-size: clamp(44px, 7vw, 80px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.05; background: linear-gradient(180deg, #ffffff 40%, #a1a1a6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 24px; }
+    .hero p { font-size: clamp(19px, 2.5vw, 24px); color: var(--text-sub); max-width: 640px; line-height: 1.35; margin-bottom: 38px; font-weight: 400; letter-spacing: -0.015em; }
+    
+    .cta-group { display: flex; gap: 18px; align-items: center; }
+    .btn { background: var(--accent); color: #fff; padding: 12px 26px; border-radius: 980px; font-size: 15px; font-weight: 400; text-decoration: none; transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1); }
+    .btn:hover { opacity: 0.9; transform: translateY(-1px); box-shadow: 0 4px 15px rgba(0,113,227,0.3); }
+    .btn.secondary { background: transparent; color: var(--accent); display: flex; align-items: center; gap: 4px; padding: 12px 0; }
+    .btn.secondary:hover { text-decoration: underline; box-shadow: none; transform: none; }
+
+    .section { max-width: 1024px; margin: 0 auto; padding: 100px 22px; }
+    .section-title { font-size: 40px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 50px; background: linear-gradient(180deg, #fff, #86868b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+    .bento-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 20px; }
+    .bento-item { background: var(--card-bg); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); border: 1px solid var(--card-border); border-radius: 28px; padding: 34px; display: flex; flex-direction: column; justify-content: space-between; transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); position: relative; overflow: hidden; }
+    .bento-item:hover { transform: translateY(-4px); border-color: rgba(255,255,255,0.18); box-shadow: 0 20px 40px rgba(0,0,0,0.6); }
+    
+    .span-4 { grid-column: span 4; }
+    .span-2 { grid-column: span 2; }
+    .span-3 { grid-column: span 3; }
+    
+    .item-tag { color: var(--accent); font-size: 12px; font-weight: 600; letter-spacing: 0.02em; margin-bottom: 10px; }
+    .item-title { font-size: 26px; font-weight: 600; letter-spacing: -0.01em; color: #ffffff; line-height: 1.2; margin-bottom: 12px; }
+    .item-desc { color: var(--text-sub); font-size: 15px; line-height: 1.45; }
+    
+    .item-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 32px; border-top: 1px solid rgba(255,255,255,0.04); padding-top: 16px; }
+    .item-price { font-size: 20px; font-weight: 500; color: #ffffff; }
+    .item-action { width: 32px; height: 32px; background: rgba(255,255,255,0.05); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--text); font-size: 14px; transition: all 0.3s; }
+    .bento-item:hover .item-action { background: #ffffff; color: #000000; }
+
+    .premium-card { background: linear-gradient(135deg, rgba(22,22,23,0.8) 0%, rgba(10,10,11,0.9) 100%); border: 1px solid rgba(0, 113, 227, 0.2); }
+    .premium-glow { position: absolute; bottom: -20%; right: -10%; width: 250px; height: 250px; background: radial-gradient(circle, rgba(0,113,227,0.25) 0%, transparent 70%); pointer-events: none; }
+
+    .footer-bar { border-top: 1px solid rgba(255,255,255,0.05); padding: 50px 22px; text-align: center; color: var(--text-sub); font-size: 12px; line-height: 1.8; }
+
+    @media (max-width: 768px) {
+      .bento-grid { grid-template-columns: 1fr; display: flex; flex-direction: column; }
+      .hero { padding-top: 120px; }
+      .cta-group { flex-direction: column; width: 100%; gap: 12px; }
+      .btn { width: 100%; text-align: center; }
+      .btn.secondary { justify-content: center; }
+    }
+  </style>
 </head>
 <body>
-  <canvas id="bg"></canvas>
+
+  <div class="gradient-bg"></div>
+
   <header>
-    <nav>
-      <a href="#about" class="nav-link">О игре</a>
-      <a href="#features" class="nav-link">Особенности</a>
-      <a href="#modding" class="nav-link">Моды</a>
-      <a href="#install" class="nav-link">Установка</a>
-      <a href="#contacts" class="nav-link">Контакты</a>
-    </nav>
+    <div class="nav-container">
+      <div class="logo">NOVA PC</div>
+      <nav class="nav-links">
+        <a href="#services">Услуги</a>
+        <a href="#contacts">Контакты</a>
+      </nav>
+    </div>
   </header>
-  <main>
-    <section class="hero">
-      <svg class="logo" viewBox="0 0 120 120">
-        <defs>
-          <radialGradient id="planetGlow" cx="50%" cy="50%" r="60%">
-            <stop offset="0%" stop-color="#fffbe6" stop-opacity="1"/>
-            <stop offset="80%" stop-color="#ffd700" stop-opacity="0.7"/>
-            <stop offset="100%" stop-color="#23264a" stop-opacity="0"/>
-          </radialGradient>
-          <linearGradient id="ringGrad" x1="0%" y1="50%" x2="100%" y2="50%">
-            <stop offset="0%" stop-color="#ffd700" stop-opacity="0.2"/>
-            <stop offset="50%" stop-color="#fffbe6" stop-opacity="0.7"/>
-            <stop offset="100%" stop-color="#ffd700" stop-opacity="0.2"/>
-          </linearGradient>
-        </defs>
-        <circle cx="60" cy="62" r="38" fill="url(#planetGlow)" stroke="#ffd700" stroke-width="4"/>
-        <ellipse cx="60" cy="70" rx="54" ry="14" fill="url(#ringGrad)" stroke="#ffd700" stroke-width="2" opacity="0.7"/>
-        <ellipse cx="60" cy="80" rx="30" ry="7" fill="#23264a" opacity="0.25"/>
-      </svg>
-      <h1>Space Mouse Flyer</h1>
-      <div class="subtitle">Аркадный космический шутер с поддержкой модов</div>
-      <a class="main-btn" href="https://github.com/KirillNavey/space-mouse-flyer" target="_blank">🚀 Скачать с GitHub</a>
-      <a class="main-btn" id="play-demo-btn" href="\play.html">🎮 Поиграть в демо</a>
-    </section>
-    <section id="about" class="section">
-      <h2>О игре</h2>
-      <p>
-        <b>Space Mouse Flyer</b> — это динамичная аркада, где вы управляете космической мышью, сражаетесь с волнами врагов, уклоняетесь от метеоров и собираете бонусы.<br>
-        <span class="gold">Игра создана для удовольствия — и для творчества!</span>
-      </p>
-    </section>
-    <section id="features" class="section">
-      <h2>Особенности</h2>
-      <div class="features">
-        <div class="feature"><b>Динамичный геймплей</b><br>Летайте, стреляйте, уклоняйтесь, выживайте!</div>
-        <div class="feature"><b>Разнообразные враги и бонусы</b><br>Обычные, быстрые, танки, зигзаги, щиты, лечение и многое другое.</div>
-        <div class="feature"><b>Случайные события</b><br>Метеоритные дожди, чёрные дыры и другие космические опасности.</div>
-        <div class="feature"><b>Система достижений</b><br>Получайте награды за особые успехи и испытания.</div>
-        <div class="feature"><b>Мощная система модов</b><br>Меняйте всё: механику, графику, звук, врагов, бонусы, достижения и даже сам игровой процесс!</div>
-        <div class="feature"><b>Сохранение прогресса</b><br>Ваши достижения и статистика сохраняются между сессиями.</div>
+
+  <section class="hero">
+    <div class="hero-tag">Новосибирск • Расчетная модель 2026</div>
+    <h1>Честный сервис.<br>Безупречная сборка.</h1>
+    <p>Прозрачная мобильная мастерская. Фото и видео фиксация диагностики, работа по чек-листам и кабель-менеджмент как искусство.</p>
+    <div class="cta-group">
+      <a href="https://t.me/Dadpoola" class="btn" target="_blank">Связаться с мастером</a>
+      <a href="#services" class="btn secondary">Узнать цены <span style="font-size:11px;">▶</span></a>
+    </div>
+  </section>
+
+  <section class="section" id="services">
+    <h2 class="section-title">Услуги</h2>
+    <div class="bento-grid">
+      
+      <div class="bento-item span-4 premium-card">
+        <div class="premium-glow"></div>
+        <div>
+          <div class="item-tag" style="color: #2997ff;">Флагманское решение</div>
+          <h3 class="item-title">Сборка премиального уровня</h3>
+          <p class="item-desc" style="max-width: 90%;">Создаем производительные системы под любые задачи. Идеальный кабель-менеджмент, обязательный POST-тест, подбор конфигурации под ваш бюджет без привязки к брендам.</p>
+        </div>
+        <div class="item-footer">
+          <span class="item-price">3 500 ₽</span>
+          <div class="item-action">→</div>
+        </div>
       </div>
-    </section>
-    <section id="modding" class="section">
-      <h2>Модификации</h2>
-      <p>
-        <b>Space Mouse Flyer</b> — одна из самых гибких игр для моддинга на Pygame.<br>
-        <span class="gold">Любой</span> может создать мод, который меняет механику, графику, звук, врагов, бонусы, достижения и даже сам игровой процесс!
-      </p>
-      <div class="mod-tip">
-        <strong>Как создать мод?</strong><br>
-        1. Создайте файл <code>my_mod.py</code> в папке <code>mods/</code>.<br>
-        2. Определите функцию <code>apply_mod(game)</code>:
+
+      <div class="bento-item span-2">
+        <div>
+          <div class="item-tag">01 / Точность</div>
+          <h3 class="item-title">Диагностика</h3>
+          <p class="item-desc">Полное тестирование компонентов и поиск причин неисправности. Бесплатно при ремонте.</p>
+        </div>
+        <div class="item-footer">
+          <span class="item-price">1 000 ₽</span>
+          <div class="item-action">→</div>
+        </div>
       </div>
-      <div class="code-block">
-def apply_mod(game):<br>
-&nbsp;&nbsp;&nbsp;&nbsp;game["set_fps"](144)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;game["player"].color = (255, 0, 255)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;print("Мой мод активирован!")
+
+      <div class="bento-item span-2">
+        <div>
+          <div class="item-tag">02 / Прохлада</div>
+          <h3 class="item-title">Чистка и замена термопасты</h3>
+          <p class="item-desc">Глубокая профилактика системы, очистка от пыли и замена термоинтерфейсов.</p>
+        </div>
+        <div class="item-footer">
+          <span class="item-price">1 200 ₽</span>
+          <div class="item-action">→</div>
+        </div>
       </div>
-      <p>
-        <b>Всё о создании модов:</b> <a class="mod-link" href="https://github.com/KirillNavey/space-mouse-flyer/blob/main/MODIFICATION_API.md" target="_blank">MODIFICATION_API.md</a>
-      </p>
-    </section>
-    <section id="install" class="section">
-      <h2>Установка и запуск</h2>
-      <ol>
-        <li>Установите Python 3.7+ и Pygame 2.0+:
-          <div class="code-block">pip install pygame</div>
-        </li>
-        <li>Скачайте или клонируйте репозиторий с GitHub.</li>
-        <li>Запустите игру:
-          <div class="code-block">python run.py</div>
-        </li>
-        <li>Для модов — просто добавьте файл в <code>mods/</code>!</li>
-      </ol>
-    </section>
-    <section id="contacts" class="section">
-      <h2>Контакты и обратная связь</h2>
-      <ul>
-        <li>GitHub: <a class="mod-link" href="https://github.com/KirillNavey/space-mouse-flyer" target="_blank">KirillNavey/space-mouse-flyer</a></li>
-        <li>Автор: <b>KirillNavey</b></li>
-        <li>Лицензия: MIT License</li>
-      </ul>
-    </section>
-  </main>
-  <footer>
-    <span class="gold">&copy; 2025 KirillNavey — Space Mouse Flyer</span><br>
-    Powered by Python &amp; Pygame | <a href="https://github.com/KirillNavey/space-mouse-flyer" class="mod-link">GitHub</a>
-  </footer>
-  <script src="main.js"></script>
-</body>
-</html>
+
+      <div class="bento-item span-2">
+        <div>
+          <div class="item-tag">03 / Скорость</div>
+          <h3 class="item-title">Апгрейд</h3>
+          <p class="item-desc">Замена и установка SSD, оперативной памяти, видеокарт, процессоров и блоков питания.</p>
+        </div>
+        <div class="item-footer">
+          <span class="item-price">1 500–3 500 ₽</span>
+          <div class="item-action">→</div>
+        </div>
+      </div>
+
+      <div class="bento-item span-2">
+        <div>
+          <div class="item-tag">04 / Стабильность</div>
+          <h3 class="item-title">Настройка ОС</h3>
+          <p class="item-desc">Установка Windows, установка официальных драйверов и тонкая настройка системы.</p>
+        </div>
+        <div class="item-footer">
+          <span class="item-price">1 500 ₽</span>
+          <div class="item-action">→</div>
+        </div>
+      </div>
+
+      <div class="bento-item span-3" style="background: rgba(255,255,255,0.02)">
+        <div>
+          <div class="item-tag" style="color: #f5f5f7;">Медиа-отчеты</div>
+          <h3 class="item-title">Никаких скрытых услуг</h3>
+          <p class="item-desc">Вы получаете прозрачный фото- и видеоотчет процесса диагностики прямо в мессенджер до начала всех работ.</p>
+        </div>
+      </div>
+
+      <div class="bento-item span-3" style="background: rgba(255,255,255,0.02)">
+        <div>
+          <div class="item-tag" style="color: #f5f5f7;">Обязательства</div>
+          <h3 class="item-title">Надежная гарантия</h3>
+
+30 дней железной гарантии на выполненную мастером работу плюс полная гарантия производителя на детали.
+
+ул. Кирова, 225 (м. Октябрьская) • Базовый план: 60 заказов / месяц • Ориентир окупаемости 4–5 мес.
+© 2026 NOVA PC. Все права защищены. Разработано в строгом минимализме.
+
+
